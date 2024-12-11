@@ -6,7 +6,7 @@
 <link rel="icon" href="{{ url_for('static', filename='opensource.ico') }}" type="image/x-icon">
 {% endblock %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}Фласк{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
@@ -19,11 +19,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">Flasky</a>
+			<a class="navbar-brand" href="/">Фласк</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
+				<li><a href="/">Домой</a></li>
 			</ul>
 		</div>
 	</div>
@@ -32,7 +32,19 @@
 
 {% block content %}
 <div class="container">
-	{% block page_content %} {% endblock %}
+	{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ message }}
+	</div>
+	{% endfor %}
+	
+	{% block page_content %}{% endblock %}
 </div>
 {% endblock %}
 
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{{ moment.locale(auto_detect=True) }}
+{% endblock %}

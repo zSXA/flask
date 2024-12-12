@@ -4,6 +4,12 @@
 {% block page_content %}
 <div class="page-header">
 	<h1>Привет, {% if name %} {{ name }} {% else %}Странник{% endif %}!</h1>
+	<p>{{known}}<p>
+	{% if not known %}
+	<p>Рад встрече с вами!<p>
+	{% else %}
+	<p>Счастлив видеть вас снова!<p>
+	{% endif %}
 	<p>Текущая дата и время {{ moment(current_time).format('LLLL') }}.</p>
 	<p>Это было {{ moment(current_time).fromNow(refresh=True) }}</p>
 	<p>Словарь сессии: {{ session }}</p>

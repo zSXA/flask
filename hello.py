@@ -7,6 +7,7 @@ from wtforms import StringField, SubmitField
 from flask_sqlalchemy import SQLAlchemy
 from wtforms.validators import DataRequired
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from flask_migrate import Migrate
 
 class Base(DeclarativeBase):
 	pass
@@ -15,6 +16,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Трудноугадываемая строка'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/postgres'
 db = SQLAlchemy(model_class=Base)
+migrate = Migrate(app, db)
 db.init_app(app)
 app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 bootstrap = Bootstrap(app)
